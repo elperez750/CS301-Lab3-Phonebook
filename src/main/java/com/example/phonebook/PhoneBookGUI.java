@@ -9,10 +9,21 @@ import javafx.stage.Stage;
 public class PhoneBookGUI extends Application {
 
     //private PhoneBookManager manager = new PhoneBookManager();
+
+    // Text field for name
     private TextField nameField = new TextField();
+
+    // Text field for phone
     private TextField phoneField = new TextField();
+
+    //Text field for address
     private TextArea addressArea = new TextArea();
+
+    // This will include all people in the phonebook
     private ListView<Person> contactList = new ListView<>();
+
+
+
 
     @Override
     public void start(Stage stage) {
@@ -21,6 +32,7 @@ public class PhoneBookGUI extends Application {
         phoneField.setPromptText("Phone");
         addressArea.setPromptText("Address");
         addressArea.setPrefRowCount(2);
+
 
         // Buttons
         Button addBtn = new Button("Add");
@@ -31,6 +43,7 @@ public class PhoneBookGUI extends Application {
 
         Button saveBtn = new Button("Save");
         //saveBtn.setOnAction(e -> manager.saveToFile());
+
 
         // Layout
         VBox inputs = new VBox(5, nameField, phoneField, addressArea);
@@ -47,6 +60,8 @@ public class PhoneBookGUI extends Application {
         stage.show();
     }
 
+
+
     private void addContact() {
         String name = nameField.getText().trim();
         if (!name.isEmpty()) {
@@ -62,7 +77,7 @@ public class PhoneBookGUI extends Application {
     private void deleteContact() {
         Person selected = contactList.getSelectionModel().getSelectedItem();
         if (selected != null) {
-            //manager.deleteContact(selected.getName());
+            // manager.deleteContact(selected.getName());
             refreshList();
         }
     }
