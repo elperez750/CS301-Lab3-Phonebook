@@ -25,8 +25,17 @@ public class PhoneBookManager {
         loadFromFile();
     }
 
-    public boolean addContact(Person person) {
 
+    public Person getContact(String name) {
+        if (contacts.containsKey(name)) {
+            return contacts.get(name);
+        }
+
+        return null;
+    }
+
+
+    public boolean addContact(Person person) {
         if (contacts.containsKey(person.getName())) {
             return false;
         }
@@ -38,13 +47,13 @@ public class PhoneBookManager {
     }
 
     public boolean deleteContact(String name) {
+
         return contacts.remove(name) != null;
+
     }
 
     public boolean modifyContact(Person oldPerson, Person newPerson) {
-        if (!contacts.containsKey(oldPerson.getName())) {
-            return false;
-        }
+
         contacts.remove(oldPerson.getName());
         contacts.put(newPerson.getName(), newPerson);
         return true;
@@ -59,7 +68,7 @@ public class PhoneBookManager {
         }
 
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("phonebook.dat"))) {
-            contacts = (TreeMap<String, Person>) in.readObject();
+            contacts = (TreeMap<String, Person>)in.readObject();
             return true;
         } catch (IOException | ClassNotFoundException e) {
             return false;
@@ -84,23 +93,6 @@ public class PhoneBookManager {
     }
 
 
-
-
-
-    /*
-    // Writing
-try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("data.dat"))) {
-    out.writeObject(myTreeMap);  // Saves entire TreeMap
-}
-
-// Reading
-try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("data.dat"))) {
-    TreeMap<String, Person> loaded = (TreeMap<String, Person>) in.readObject();
-    //                                ↑ Type cast needed
-}
-     */
 
 
 }
