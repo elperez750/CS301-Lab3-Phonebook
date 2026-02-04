@@ -353,6 +353,26 @@ public class PhoneBookGUI extends Application {
 
     private void contactInformation() {
         // Your implementation here
+        String name = nameField.getText().trim();
+        Person person = manager.getContact(name);
+
+        if (person != null) {
+            resetEntries();
+            resetDisplayPanel();
+            displayPanel.appendText(person.getName() + "\n");
+            displayPanel.appendText(person.getAddress() + "\n");
+            displayPanel.appendText(person.getPhone() + "\n");
+            showStatus(name + " was found succesfully", true);
+
+        }
+
+        else {
+            showStatus(name + " was not found succesfully", false);
+        }
+
+
+
+
     }
 
     private void printEntirePhoneBook() {

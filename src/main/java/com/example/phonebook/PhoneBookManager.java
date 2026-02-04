@@ -11,22 +11,31 @@ public class PhoneBookManager {
     Structure will look like the following:
 
 
-    Elliott: <Elliott, 1111 Merea Lane, 2065029287
+    Gerald: <Gerald, 39820 Rodger Lane, 5098938291>
 
-    We will search with the nam
+    We will search with the name
      */
+
+
     private TreeMap<String, Person> contacts;
+
+    // Where we will save the phonebook
     private static final String FILE_NAME = "phonebook.dat";
 
 
 
     public PhoneBookManager() {
+
+        // Case-insensitive which is useful for sorting and deleting later on!
         contacts = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+
+        // Load save phonebook if we have one
         loadFromFile();
     }
 
 
     public Person getContact(String name) {
+
         if (contacts.containsKey(name)) {
             return contacts.get(name);
         }
@@ -36,6 +45,8 @@ public class PhoneBookManager {
 
 
     public boolean addContact(Person person) {
+
+        // Preventing duplicates
         if (contacts.containsKey(person.getName())) {
             return false;
         }
@@ -46,19 +57,20 @@ public class PhoneBookManager {
 
     }
 
+
+
     public boolean deleteContact(String name) {
-
         return contacts.remove(name) != null;
-
     }
 
-    public boolean modifyContact(Person oldPerson, Person newPerson) {
 
+    public boolean modifyContact(Person oldPerson, Person newPerson) {
+        // Easier to remove Person object with old info and insert Person object with new info.
         contacts.remove(oldPerson.getName());
         contacts.put(newPerson.getName(), newPerson);
         return true;
-
     }
+
 
     @SuppressWarnings("unchecked")
     public boolean loadFromFile() {

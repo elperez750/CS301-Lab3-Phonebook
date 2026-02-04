@@ -9,6 +9,7 @@ public class Person implements Serializable {
     private String phone;
     private String address;
 
+
     public Person(String name, String address, String phone) {
         this.name = name;
         this.address = address;
